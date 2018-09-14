@@ -27,7 +27,7 @@ if ( ! function_exists('getUrlServicio'))
 {
     function getUrlServicio($servicio)
     {
-        return "http://18.234.212.86:5123/push/".$servicio;
+        return "http://54.164.92.239:4489/push/".$servicio;
     }   
 }
 
