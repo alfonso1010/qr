@@ -18,16 +18,14 @@ class Api extends REST_Controller {
         }
         $this->load->library('form_validation');
         $this->load->helper('form');
-        $token = $this->input->get_request_header('Authorization');
-        /*$hay_token = $this->generico->obtenerRegistros([
-                    'select' => '*',
-                    'from' => 'access_tokens',
-                    'where' => 'WHERE token="'.$token.'"'
-                  ]);
-        if(!isset($hay_token[0])){
-          $this->response("Credenciales Inválidas", 401);
-        } */
-        
+        $config = ['dsn' => $this->db->dsn,
+                   'username' => $this->db->username,
+                   'password' => $this->db->password
+                  ];
+
+        @session_start();
+        $this->load->library("Server", $config);
+        $this->server->require_scope("userinfo cloud file node");//you can require scope here
     }
 
     public function index_get($id = 0) {

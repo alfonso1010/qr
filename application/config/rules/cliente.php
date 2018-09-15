@@ -1,6 +1,13 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 //adding config items.
 $config['post'] = [
+        'username' => [
+                'field' => 'username',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'username es requerido',
+                ],
+        ],
         'nombre' => [
                 'field' => 'nombre',
                 'rules' => 'required',
@@ -8,11 +15,11 @@ $config['post'] = [
                     'required' => 'nombre es requerido',
                 ],
         ],
-        'token' => [
-                'field' => 'token',
+        'password' => [
+                'field' => 'password',
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'token es requerido',
+                    'required' => 'password es requerido',
                 ],
         ],
     ];
@@ -26,7 +33,14 @@ $config['update'] = [
                 'min_length' => 'Mínimo 2 caracteres',
             ],
     ],
-    'token' => [
+    'username' => [
+            'field' => 'nombre',
+            'rules' => 'min_length[0]',
+            'errors' => [
+                'min_length' => 'Mínimo 2 caracteres',
+            ],
+    ],
+    'password' => [
             'field' => 'token',
             'rules' => 'min_length[0]',
             'errors' => [

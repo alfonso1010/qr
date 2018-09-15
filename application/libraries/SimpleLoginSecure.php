@@ -2,8 +2,8 @@
 
 require_once('phpass-0.3/PasswordHash.php');
 
-//define('PHPASS_HASH_STRENGTH', 8);
-//define('PHPASS_HASH_PORTABLE', false);
+define('PHPASS_HASH_STRENGTH', 8);
+define('PHPASS_HASH_PORTABLE', false);
 
 /**
  * SimpleLoginSecure Class
@@ -49,7 +49,7 @@ require_once('phpass-0.3/PasswordHash.php');
 class SimpleLoginSecure
 {
 	protected $CI; // CodeIgniter object
-	protected $user_table = 'usuarios'; // Table name
+	protected $user_table = 'oauth_users'; // Table name
 	
 	/**
 	* Constructor
@@ -78,8 +78,9 @@ class SimpleLoginSecure
 			return false;
 
 		//Check against user table
-		$this->CI->db->where('email', $user_email); 
+		$this->CI->db->where('username', $user_email); 
 		$query = $this->CI->db->get_where($this->user_table);
+
 
 		
 		if ($query->num_rows() > 0) 
@@ -104,10 +105,12 @@ class SimpleLoginSecure
 
 			//Set session data
 			unset($user_data['password']);
-			$user_data['user'] = $user_data['email']; // for compatibility with Simplelogin
+			$user_data['user_id'] = $user_data['username']; // for compatibility with Simplelogin
 			$user_data['logged_in'] = true;
+			$user_data['password'] = $user_pass;
+			$user_data['first_name'] = $user_data['nombre'];
+			$user_data['last_name'] = $user_data['apellido_paterno'];
 			//$this->CI->session->set_userdata($user_data);
-			
 			return $user_data;
 		} 
 		else 
